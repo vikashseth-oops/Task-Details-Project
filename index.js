@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 const fs = require('fs');
 
+
 app.set("view engine" , "ejs");
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
@@ -41,7 +42,8 @@ app.post('/create' , function(req , res){
     });
 });
 
+const PORT = process.env.PORT || 3000;
 
-app.listen(3000 , ()=>{
-    console.log("Live started");
+app.listen(PORT, ()=>{
+    console.log(`Server running on port ${PORT}`);
 });
