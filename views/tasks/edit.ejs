@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head', { title: 'Edit ' + task.title + ' — Task Manager' }) %>
+</head>
+<body class="min-h-screen bg-zinc-950 font-sans text-zinc-100 antialiased">
+  <%- include('../partials/nav', { user, showBack: true }) %>
+
+  <main class="mx-auto max-w-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/80 p-6 shadow-xl shadow-black/20 sm:p-10">
+      <header class="mb-6 sm:mb-8">
+        <p class="mb-2 text-xs font-medium uppercase tracking-wider text-zinc-500 sm:text-sm">Edit task</p>
+        <h1 class="break-words text-2xl font-bold tracking-tight text-white sm:text-3xl">Update task</h1>
+        <p class="mt-2 text-sm text-zinc-400 sm:text-base">Editing <span class="font-medium text-zinc-300"><%= task.title %></span></p>
+      </header>
+
+      <% if (error) { %>
+        <div class="mb-5 rounded-xl border border-red-800/50 bg-red-950/50 px-4 py-3 text-sm text-red-300">
+          <%= error %>
+        </div>
+      <% } %>
+
+      <form action="/tasks/<%= task._id %>" method="post" class="space-y-5">
+        <div>
+          <label for="title" class="mb-1.5 block text-sm font-medium text-zinc-400">Title</label>
+          <input
+            id="title"
+            class="block w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white transition outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30 sm:px-5"
+            type="text"
+            name="title"
+            value="<%= task.title %>"
+            required
+          >
+        </div>
+        <div>
+          <label for="details" class="mb-1.5 block text-sm font-medium text-zinc-400">Details</label>
+          <textarea
+            id="details"
+            class="block min-h-36 w-full resize-y rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white transition outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30 sm:px-5 sm:py-4"
+            name="details"
+            required
+          ><%= task.details %></textarea>
+        </div>
+        <div class="flex flex-col gap-3 pt-2 sm:flex-row">
+          <button
+            type="submit"
+            class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-amber-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-amber-600/25 transition hover:bg-amber-500 active:scale-[0.98] sm:w-auto"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            Save Changes
+          </button>
+          <a
+            href="/tasks/<%= task._id %>"
+            class="inline-flex w-full items-center justify-center rounded-xl border border-zinc-700 px-6 py-3 text-sm font-medium text-zinc-400 transition hover:border-zinc-600 hover:bg-zinc-800 hover:text-zinc-200 sm:w-auto"
+          >
+            Cancel
+          </a>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
